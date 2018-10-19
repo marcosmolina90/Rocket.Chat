@@ -67,7 +67,7 @@ function doDirectorySearch(config, cb) {
 				return {
 					name: result.name,
 					username: result.username,
-					createdAt: timeAgo(result.createdAt),
+					createdAt: timeAgo(result.createdAt, t),
 					peer: result.federation.peer,
 				};
 			}
