@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 import PeerClient from './peerClient';
 import PeerDNS from './peerDNS';
 import PeerHTTP from './peerHTTP';

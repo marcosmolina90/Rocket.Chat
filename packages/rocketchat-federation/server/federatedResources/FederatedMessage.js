@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 import FederatedResource from './FederatedResource';
 import FederatedRoom from './FederatedRoom';
 import FederatedUser from './FederatedUser';

@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 import NodeRSA from 'node-rsa';
 
 Meteor.startup(function() {
