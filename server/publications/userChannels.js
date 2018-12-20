@@ -4,6 +4,8 @@ Meteor.publish('userChannels', function(userId) {
 	if (!this.userId) {
 		return this.ready();
 	}
+	console('userchanel')
+
 
 	if (RocketChat.authz.hasPermission(this.userId, 'view-other-user-channels') !== true) {
 		return this.ready();

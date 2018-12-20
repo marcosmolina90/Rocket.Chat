@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { RocketChat } from 'meteor/rocketchat:lib';
-import { EJSON } from 'meteor/ejson';
 
 RocketChat.API.helperMethods.set('parseJsonQuery', function _parseJsonQuery() {
 	let sort;
@@ -51,7 +50,7 @@ RocketChat.API.helperMethods.set('parseJsonQuery', function _parseJsonQuery() {
 	let query = {};
 	if (this.queryParams.query) {
 		try {
-			query = EJSON.parse(this.queryParams.query);
+			query = JSON.parse(this.queryParams.query);
 		} catch (e) {
 			this.logger.warn(`Invalid query parameter provided "${ this.queryParams.query }":`, e);
 			throw new Meteor.Error('error-invalid-query', `Invalid query parameter provided: "${ this.queryParams.query }"`, { helperMethod: 'parseJsonQuery' });

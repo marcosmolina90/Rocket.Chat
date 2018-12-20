@@ -13,7 +13,6 @@
 		"LivechatPageVisited"         : false,
 		"LivechatTrigger"             : false,
 		"parentCall"                  : false,
-		"t"                           : false,
 		"Trigger"                     : false,
 		"Triggers"                    : false,
 		"visitor"                     : false

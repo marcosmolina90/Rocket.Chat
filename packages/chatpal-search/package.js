@@ -9,7 +9,6 @@ Package.onUse(function(api) {
 	api.use([
 		'ecmascript',
 		'templating',
-		'rocketchat:utils',
 	]);
 	api.addAssets([
 		'server/asset/chatpal-enter.svg',

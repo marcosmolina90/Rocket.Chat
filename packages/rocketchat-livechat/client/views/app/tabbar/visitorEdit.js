@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
-import { ChatRoom } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { t, ChatRoom } from 'meteor/rocketchat:ui';
 import { LivechatVisitor } from '../../../collections/LivechatVisitor';
 import toastr from 'toastr';
 

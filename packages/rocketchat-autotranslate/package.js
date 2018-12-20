@@ -11,7 +11,6 @@ Package.onUse(function(api) {
 		'ddp-rate-limiter',
 		'rocketchat:lib',
 		'templating',
-		'rocketchat:utils',
 	]);
 	api.addFiles('client/stylesheets/autotranslate.css', 'client');
 	api.mainModule('client/index.js', 'client');

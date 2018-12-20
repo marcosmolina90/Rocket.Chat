@@ -131,6 +131,38 @@ class ModelUsers extends RocketChat.models._Base {
 		return this.find(query, options);
 	}
 
+	findByActiveUsersGroupExcept(searchTerm, roles, exceptions, options) {
+		if (exceptions == null) { exceptions = []; }
+		if (options == null) { options = {}; }
+		if (!_.isArray(exceptions)) {
+			exceptions = [exceptions];
+		}
+
+		const termRegex = new RegExp(s.escapeRegExp(searchTerm), 'i');
+
+		const orStmt = _.reduce(RocketChat.settings.get('Accounts_SearchFields').trim().split(','), function(acc, el) {
+			acc.push({ [el.trim()]: termRegex });
+			return acc;
+		}, []);
+		const query = {
+			$and: [
+				{
+					active: true,
+					$or: orStmt,
+				},
+				{
+					username: { $exists: true, $nin: exceptions },
+				},
+				{
+					"roles": {"$regex": roles[0], "$options": "i"}
+				}
+			],
+		};
+
+		// do not use cache
+		return this._db.find(query, options);
+	}
+
 	findByActiveUsersExcept(searchTerm, exceptions, options) {
 		if (exceptions == null) { exceptions = []; }
 		if (options == null) { options = {}; }
@@ -178,6 +210,7 @@ class ModelUsers extends RocketChat.models._Base {
 
 		return this.find(query, options);
 	}
+	
 
 	findByUsernameNameOrEmailAddress(usernameNameOrEmailAddress, options) {
 		const query = {

@@ -10,7 +10,6 @@ Package.onUse(function(api) {
 		'ecmascript',
 		'rocketchat:file',
 		'rocketchat:lib',
-		'rocketchat:utils',
 		'templating',
 		'reactive-var',
 		'webapp',

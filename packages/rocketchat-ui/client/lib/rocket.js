@@ -1,3 +1,4 @@
+/* globals Modernizr */
 RocketChat.Login = (function() {
 	function onClick(el) {
 		const $el = $(el);

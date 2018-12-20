@@ -11,7 +11,6 @@ Package.onUse(function(api) {
 		'rocketchat:emoji',
 		'rocketchat:file',
 		'rocketchat:lib',
-		'rocketchat:utils',
 		'templating',
 		'webapp',
 		'kadira:flow-router',

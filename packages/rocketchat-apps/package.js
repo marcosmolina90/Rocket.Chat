@@ -8,7 +8,6 @@ Package.onUse(function(api) {
 		'ecmascript',
 		'rocketchat:lib',
 		'rocketchat:api',
-		'rocketchat:utils',
 		'templating',
 	]);
 

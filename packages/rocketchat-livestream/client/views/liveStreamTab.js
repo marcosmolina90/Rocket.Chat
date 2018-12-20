@@ -7,8 +7,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import toastr from 'toastr';
 import { auth } from '../oauth.js';
 import { RocketChatAnnouncement, RocketChat, handleError } from 'meteor/rocketchat:lib';
-import { popout } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { popout, t } from 'meteor/rocketchat:ui';
 
 export const call = (...args) => new Promise(function(resolve, reject) {
 	Meteor.call(...args, function(err, result) {

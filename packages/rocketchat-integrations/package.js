@@ -15,7 +15,6 @@ Package.onUse(function(api) {
 		'rocketchat:authorization',
 		'rocketchat:theme',
 		'rocketchat:logger',
-		'rocketchat:utils',
 		'kadira:flow-router',
 		'kadira:blaze-layout',
 		'nimble:restivus',

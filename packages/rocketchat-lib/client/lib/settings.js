@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { t } from 'meteor/rocketchat:utils';
 
 /*
 * RocketChat.settings holds all packages settings

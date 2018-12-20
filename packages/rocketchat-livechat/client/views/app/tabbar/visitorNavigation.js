@@ -1,7 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
-import { ChatRoom } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { t, ChatRoom } from 'meteor/rocketchat:ui';
 import moment from 'moment';
 
 const visitorNavigationHistory = new Mongo.Collection('visitor_navigation_history');

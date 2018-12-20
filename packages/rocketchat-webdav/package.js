@@ -15,7 +15,6 @@ Package.onUse(function(api) {
 		'mongo',
 		'templating',
 		'less',
-		'rocketchat:utils',
 		'rocketchat:lib',
 		'rocketchat:api',
 		'rocketchat:grant',

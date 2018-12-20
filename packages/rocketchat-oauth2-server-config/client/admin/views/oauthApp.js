@@ -4,8 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { RocketChat, handleError } from 'meteor/rocketchat:lib';
-import { modal } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { t, modal } from 'meteor/rocketchat:ui';
 import { ChatOAuthApps } from '../collection';
 import toastr from 'toastr';
 

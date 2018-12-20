@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { RocketChat } from 'meteor/rocketchat:lib';
-import { modal } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { t, modal } from 'meteor/rocketchat:ui';
 import toastr from 'toastr';
 
 Template.accountIntegrations.helpers({

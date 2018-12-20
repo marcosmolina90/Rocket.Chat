@@ -1,4 +1,5 @@
-export const ChromeScreenShare = {
+/* globals ChromeScreenShare, fireGlobalEvent */
+this.ChromeScreenShare = {
 	callbacks: {},
 	installed: false,
 	init() {

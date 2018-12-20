@@ -5,7 +5,6 @@ import { Tracker } from 'meteor/tracker';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { t } from 'meteor/rocketchat:utils';
 import _ from 'underscore';
 import s from 'underscore.string';
 import moment from 'moment';
@@ -20,10 +19,10 @@ Meteor.startup(() => {
 	});
 });
 
-ChatMessages = class ChatMessages {
+ChatMessages = class ChatMessages { //eslint-disable-line
 	constructor() {
 
-		this.saveTextMessageBox = _.debounce((rid, value) => {
+		this.saveTextMessageBox = _.debounce((rid, value) => { // eslint
 			const key = `messagebox_${ rid }`;
 			return value.length ? localStorage.setItem(key, value) : localStorage.removeItem(key);
 		}, 1000);

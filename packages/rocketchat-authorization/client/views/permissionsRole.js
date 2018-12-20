@@ -2,8 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
-import { modal } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { t, modal } from 'meteor/rocketchat:ui';
 import { RocketChat, handleError } from 'meteor/rocketchat:lib';
 
 import toastr from 'toastr';

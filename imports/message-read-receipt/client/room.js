@@ -1,5 +1,3 @@
-import { t } from 'meteor/rocketchat:utils';
-
 RocketChat.MessageAction.addButton({
 	id: 'receipt-detail',
 	icon: 'info-circled',

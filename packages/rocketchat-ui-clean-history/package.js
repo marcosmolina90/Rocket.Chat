@@ -15,7 +15,6 @@ Package.onUse(function(api) {
 		'mongo',
 		'ecmascript',
 		'templating',
-		'rocketchat:utils',
 		'rocketchat:lib',
 	]);
 	api.addFiles('client/views/stylesheets/cleanHistory.css', 'client');

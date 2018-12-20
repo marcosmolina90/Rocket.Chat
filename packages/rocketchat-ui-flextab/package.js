@@ -15,7 +15,6 @@ Package.onUse(function(api) {
 		'mongo',
 		'ecmascript',
 		'templating',
-		'rocketchat:utils',
 		'rocketchat:lib',
 		'mizzao:autocomplete',
 		'rocketchat:webrtc',

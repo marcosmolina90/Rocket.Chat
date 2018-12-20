@@ -1,4 +1,4 @@
-import { Match, check } from 'meteor/check';
+import { check } from 'meteor/check';
 
 import { Storage } from './storage';
 import { routes } from './routes';
@@ -7,7 +7,8 @@ class Providers extends Storage {
 	register(name, options, getUser) {
 		check(name, String);
 		check(options, {
-			scope: Match.OneOf(String, [String]),
+			// eslint-disable-next-line
+			scope: Match.OneOf(String, [String])
 		});
 		check(getUser, Function);
 

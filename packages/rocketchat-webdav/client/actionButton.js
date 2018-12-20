@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { modal } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { t, modal } from 'meteor/rocketchat:ui';
 import { RocketChat } from 'meteor/rocketchat:lib';
 
 Meteor.startup(function() {

@@ -6,7 +6,7 @@ import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { RocketChat } from 'meteor/rocketchat:lib';
-import { t } from 'meteor/rocketchat:utils';
+import { t } from 'meteor/rocketchat:ui';
 import _ from 'underscore';
 
 const usersFromRoomMessages = new Mongo.Collection(null);
@@ -92,6 +92,7 @@ const fetchUsersFromServer = (filterText, records, cb, rid) => {
 };
 
 const fetchRoomsFromServer = (filterText, records, cb, rid) => {
+	console.log('sadsadsadsadsa');
 	if (!RocketChat.authz.hasAllPermission('view-outside-room')) {
 		return cb && cb([]);
 	}
@@ -213,6 +214,7 @@ Template.messagePopupConfig.helpers({
 				// If needed, add to list the online users
 				if (items.length < 5 && filterText !== '') {
 					const usernamesAlreadyFetched = items.map(({ username }) => username);
+					console.log("ewqeewqewq");
 					if (!RocketChat.authz.hasAllPermission('view-outside-room')) {
 						const usernamesFromDMs = RocketChat.models.Subscriptions
 							.find(

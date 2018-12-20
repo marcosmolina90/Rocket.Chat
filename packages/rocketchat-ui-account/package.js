@@ -16,7 +16,6 @@ Package.onUse(function(api) {
 		'templating',
 		'rocketchat:lib',
 		'sha',
-		'rocketchat:utils',
 		'rocketchat:lazy-load',
 	]);
 	api.mainModule('client/index.js', 'client');

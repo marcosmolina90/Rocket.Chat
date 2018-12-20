@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { RocketChat } from 'meteor/rocketchat:lib';
-import { SideNav } from 'meteor/rocketchat:ui';
-import { t } from 'meteor/rocketchat:utils';
+import { t, SideNav } from 'meteor/rocketchat:ui';
 
 Template.accountFlex.events({
 	'click [data-action="close"]'() {

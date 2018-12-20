@@ -1,7 +1,8 @@
+/* globals alerts */
 import { Blaze } from 'meteor/blaze';
 import { Template } from 'meteor/templating';
 
-alerts = {
+alerts = { //eslint-disable-line
 	renderedAlert: null,
 	open(config) {
 		this.close(false);
