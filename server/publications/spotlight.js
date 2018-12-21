@@ -32,7 +32,7 @@ Meteor.methods({
 			rooms: [],
 		};
 		const roomOptions = {
-			limit: 5,
+			limit: 100,
 			fields: {
 				t: 1,
 				name: 1,
@@ -51,11 +51,12 @@ Meteor.methods({
 			return result;
 		}
 		const userOptions = {
-			limit: 5,
+			limit: 100,
 			fields: {
 				username: 1,
 				name: 1,
 				status: 1,
+				roles: 1
 			},
 			sort: {},
 		};
@@ -65,7 +66,8 @@ Meteor.methods({
 			userOptions.sort.username = 1;
 		}
 
-		if(RocketChat.authz.hasPermission(userId, 'view-only-group')){
+		if(RocketChat.authz.hasPermission(userId, 'view-only-group') 
+		    && !RocketChat.authz.hasPermission(userId, 'view-outside-room')){
 			var user = RocketChat.models.Users.find({ _id: userId}).fetch();
 			console.log('role', user[0].roles);
 			result.users = RocketChat.models.Users.findByActiveUsersGroupExcept(text, user[0].roles, usernames, userOptions).fetch();
