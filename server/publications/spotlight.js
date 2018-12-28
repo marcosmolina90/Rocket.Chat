@@ -15,7 +15,7 @@ function fetchRooms(userId, rooms) {
 
 Meteor.methods({
 	spotlight(text, usernames, type = { users: true, rooms: true }, rid) {
-		console.log('dsadasdasdas');
+		console.log('marcos chamou spotlight');
 		const searchForChannels = text[0] === '#';
 		const searchForDMs = text[0] === '@';
 		if (searchForChannels) {
@@ -69,8 +69,9 @@ Meteor.methods({
 		if(RocketChat.authz.hasPermission(userId, 'view-only-group') 
 		    && !RocketChat.authz.hasPermission(userId, 'view-outside-room')){
 			var user = RocketChat.models.Users.find({ _id: userId}).fetch();
-			console.log('role', user[0].roles);
 			result.users = RocketChat.models.Users.findByActiveUsersGroupExcept(text, user[0].roles, usernames, userOptions).fetch();
+			console.log('marcos role numero de usuarios '+result.users.length, user[0].roles);
+			
 			return result;
 		}
 

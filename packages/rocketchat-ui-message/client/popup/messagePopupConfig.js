@@ -58,6 +58,7 @@ Meteor.startup(function() {
 });
 
 const fetchUsersFromServer = (filterText, records, cb, rid) => {
+	console.log('marcos chamou fetchUsersFromServer');
 	const usernames = records.map(({ username }) => username);
 
 	return Meteor.call('spotlight', filterText, usernames, { users: true }, rid, (error, results) => {
@@ -92,7 +93,7 @@ const fetchUsersFromServer = (filterText, records, cb, rid) => {
 };
 
 const fetchRoomsFromServer = (filterText, records, cb, rid) => {
-	console.log('sadsadsadsadsa');
+	console.log('marcos chamou fetchRoomsFromServer');
 	if (!RocketChat.authz.hasAllPermission('view-outside-room')) {
 		return cb && cb([]);
 	}
