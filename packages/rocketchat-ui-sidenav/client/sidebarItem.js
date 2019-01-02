@@ -32,6 +32,14 @@ Template.sidebarItem.helpers({
 	isLivechatQueue() {
 		return this.pathSection === 'livechat-queue';
 	},
+	roles(){
+		return this.role;
+	},
+	showGroup(){
+		console.log('showGroup')
+		return this.showGroup;
+	}
+
 });
 
 function timeAgo(time) {

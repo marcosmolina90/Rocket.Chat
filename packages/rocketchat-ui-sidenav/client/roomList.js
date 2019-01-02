@@ -4,6 +4,7 @@ import { Template } from 'meteor/templating';
 
 Template.roomList.helpers({
 	rooms() {
+		console.log('marcos Template.roomList.helpers');
 		/*
 			modes:
 				sortby activity/alphabetical

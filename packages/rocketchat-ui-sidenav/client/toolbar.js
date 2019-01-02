@@ -33,15 +33,39 @@ const getFromServer = (cb, type) => {
 		const resultsFromServer = [];
 		const usersLength = results.users.length;
 		const roomsLength = results.rooms.length;
-
+		const notGroup = ["user", "bot", "guest", "admin", "livechat-agent", "livechat-guest"];
 		if (usersLength) {
+			let roles = [];
 			for (let i = 0; i < usersLength; i++) {
-				resultsFromServer.push({
-					_id: results.users[i]._id,
-					t: 'd',
-					name: results.users[i].username,
-					fname: results.users[i].name,
-				});
+				let user = results.users[i];
+				for(let r=0; r< user.roles.length; r++){
+					if(!roles.includes(user.roles[r]) && !notGroup.includes(user.roles[r])){
+					    roles.push(user.roles[r]);
+					}
+				}
+			}
+			roles.sort();
+			for(let r =0; r<roles.length; r++){
+				for (let i = 0; i < usersLength; i++) {
+					if(results.users[i].roles.includes(roles[r])){
+					resultsFromServer.push({
+						_id: results.users[i]._id,
+						t: 'd',
+						name: results.users[i].username,
+						fname: results.users[i].name,
+						roles: results.users[i].roles,
+						role: roles[r],
+					});
+					}
+				}
+			}
+
+			for (let i = 0; i < resultsFromServer.length; i++) {
+				let showGroup = false;
+				if(i === 0 || resultsFromServer[i].role !== resultsFromServer[i-1].role ){
+					showGroup = true;
+				}
+				resultsFromServer[i].showGroup =showGroup;
 			}
 		}
         if (roomsLength) {
@@ -59,6 +83,9 @@ const getFromServer = (cb, type) => {
 					t: results.rooms[i].t,
 					name: results.rooms[i].name,
 					lastMessage: results.rooms[i].lastMessage,
+					roles : [],
+					role: "",
+					showGroup: false,
 				});
 			}
 		}

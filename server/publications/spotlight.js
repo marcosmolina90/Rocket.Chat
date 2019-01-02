@@ -51,7 +51,7 @@ Meteor.methods({
 			return result;
 		}
 		const userOptions = {
-			limit: 100,
+			limit: 300,
 			fields: {
 				username: 1,
 				name: 1,
