@@ -55,6 +55,10 @@ class ModelSubscriptions extends RocketChat.models._Base {
 	}
 
 	// FIND
+	findByUserIdGroup(userId, options){
+		return this.findByUserId(userId, options).fetch();
+	}
+
 	findByUserId(userId, options) {
 		const query =
 			{ 'u._id': userId };

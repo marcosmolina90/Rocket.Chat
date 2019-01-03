@@ -14,6 +14,32 @@ function fetchRooms(userId, rooms) {
 }
 
 Meteor.methods({
+	loadroomlist(id) {
+		var results = [];
+		var chats = RocketChat.models.Subscriptions.find({ 'open': true, 'name': id }).fetch();
+		const notGroup = ["user", "bot", "guest", "admin", "livechat-agent", "livechat-guest"];
+		const roles = [];
+		for (var i = 0; i < chats.length; i++) {
+			if (chats[i].name) {
+				var usr = null;
+				var usrs = RocketChat.models.Users.findByUsername(chats[i].name, {fields: {"roles" : 1}}).fetch();
+				if(usrs && usrs[0]){
+					usr = usrs[0];
+				}
+				if (usr && usr.roles) {
+					chats[i].roles = usr.roles;
+					for (var r = 0; r < usr.roles.length; r++) {
+						if (!roles.includes(usr.roles[r]) && !notGroup.includes(usr.roles[r])) {
+							roles.push(usr.roles[r]);
+						}
+					}
+				} 
+			} 
+		}
+		roles.sort();
+		return {rooms: chats, roles: roles }
+		
+	},
 	spotlight(text, usernames, type = { users: true, rooms: true }, rid) {
 		console.log('marcos chamou spotlight');
 		const searchForChannels = text[0] === '#';
@@ -66,12 +92,12 @@ Meteor.methods({
 			userOptions.sort.username = 1;
 		}
 
-		if(RocketChat.authz.hasPermission(userId, 'view-only-group') 
-		    && !RocketChat.authz.hasPermission(userId, 'view-outside-room')){
-			var user = RocketChat.models.Users.find({ _id: userId}).fetch();
+		if (RocketChat.authz.hasPermission(userId, 'view-only-group')
+			&& !RocketChat.authz.hasPermission(userId, 'view-outside-room')) {
+			var user = RocketChat.models.Users.find({ _id: userId }).fetch();
 			result.users = RocketChat.models.Users.findByActiveUsersGroupExcept(text, user[0].roles, usernames, userOptions).fetch();
-			console.log('marcos role numero de usuarios '+result.users.length, user[0].roles);
-			
+			console.log('marcos role numero de usuarios ' + result.users.length, user[0].roles);
+
 			return result;
 		}
 
