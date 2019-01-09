@@ -44,7 +44,7 @@ const getFromServer = (cb, type) => {
 				}
 			}
 			roles.sort();
-			for(let r =0; r < roles.length; r++) {
+			for (let r =0; r < roles.length; r++) {
 				for (let i = 0; i < usersLength; i++) {
 					if (results.users[i].roles.includes(roles[r])) {
 						resultsFromServer.push({
@@ -61,7 +61,7 @@ const getFromServer = (cb, type) => {
 
 			for (let i = 0; i < resultsFromServer.length; i++) {
 				let showGroup = false;
-				if (i === 0 || resultsFromServer[i].role !== resultsFromServer[i-1].role){
+				if (i === 0 || resultsFromServer[i].role !== resultsFromServer[i-1].role) {
 					showGroup = true;
 				}
 				resultsFromServer[i].showGroup = showGroup;
@@ -69,8 +69,8 @@ const getFromServer = (cb, type) => {
 		}
 		if (roomsLength) {
 			for (let i = 0; i < roomsLength; i++) {
-				const alreadyOnClient  = true;
-				if(resultsFromClient){
+				let alreadyOnClient  = true;
+				if (resultsFromClient){
 					alreadyOnClient = resultsFromClient.find((item) => item._id === results.rooms[i]._id);
 				}
 				if (alreadyOnClient) {
@@ -90,9 +90,9 @@ const getFromServer = (cb, type) => {
 		}
 
 		if (resultsFromServer.length) {
-			if(resultsFromClient){
+			if (resultsFromClient){
 				cb(resultsFromClient.concat(resultsFromServer));
-			}else{
+			} else{
 				cb(resultsFromServer)
 			}
 		}
