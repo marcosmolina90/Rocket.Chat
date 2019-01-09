@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { RocketChat, UiTextContext } from 'meteor/rocketchat:lib';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 
 Template.roomList.onCreated(function helloOnCreated() {
@@ -110,7 +111,7 @@ Template.roomList.helpers({
 
 	roomType(room) {
 		if (room.header || room.identifier) {
-			return `type-${room.header || room.identifier}`;
+			return `type-${ room.header || room.identifier }`;
 		}
 	},
 
