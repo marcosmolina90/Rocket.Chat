@@ -175,13 +175,13 @@ const mergeRoomSub = (room) => {
 		rid: room._id,
 	},
 	{
-			$set: {
-				lastMessage: room.lastMessage,
-				lm: room._updatedAt,
-				streamingOptions: room.streamingOptions,
-				...getLowerCaseNames(room, sub.name, sub.fname),
-			},
-		});
+		$set: {
+			lastMessage: room.lastMessage,
+			lm: room._updatedAt,
+			streamingOptions: room.streamingOptions,
+			...getLowerCaseNames(room, sub.name, sub.fname),
+		},
+	});
 
 	return room;
 };
