@@ -5,7 +5,7 @@ import { Template } from 'meteor/templating';
 
 Template.roomList.onCreated(function helloOnCreated() {
 	this.list = new ReactiveVar([]);
-	let chats = ChatSubscription.find({ open: true }, {}).fetch();
+	const chats = ChatSubscription.find({ open: true }, {}).fetch();
 	Meteor.call('loadroomlist', chats, (err, results) => {
 		this.list.set(results);
 	});
@@ -145,9 +145,10 @@ const mergeSubRoom = (subscription) => {
 		},
 	});
 	if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
-		var chats = Template.instance().list.get();
+		let chats = Template.instance().list.get();
 		for (const i = 0; i < chats.length; i++) {
-			if (chats[i].rid == subscription.rid) {
+			if (chats[i].rid === subscription.rid) {
+				const room = RocketChat.models.Rooms.findOne(subscription.rid) || { _updatedAt: subscription.ts };
 				chats[i].lastMessage = room.lastMessage;
 				chats[i].lm = room._updatedAt;
 				chats[i].streamingOptions = room.streamingOptions;
@@ -172,7 +173,8 @@ const mergeRoomSub = (room) => {
 
 	RocketChat.models.Subscriptions.update({
 		rid: room._id,
-	}, {
+	},
+	{
 			$set: {
 				lastMessage: room.lastMessage,
 				lm: room._updatedAt,

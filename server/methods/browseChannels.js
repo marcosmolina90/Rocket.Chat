@@ -79,8 +79,7 @@ Meteor.methods({
 		}
 
 		const sort = sortUsers(sortBy, sortDirection);
-        if(RocketChat.authz.hasPermission(user._id), 'view-only-group'){
-			console.log('permissao');
+		if(RocketChat.authz.hasPermission(user._id), 'view-only-group') {
 			return {
 				results: RocketChat.models.Users.findByActiveUsersGroupExcept(text, [user.username], {
 					...options,
@@ -96,8 +95,6 @@ Meteor.methods({
 			};
 		}
 
-
-		// type === users
 		if (!RocketChat.authz.hasPermission(user._id, 'view-outside-room') || !RocketChat.authz.hasPermission(user._id, 'view-d-room')) {
 			return;
 		}
