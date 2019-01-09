@@ -79,7 +79,7 @@ Meteor.methods({
 		}
 
 		const sort = sortUsers(sortBy, sortDirection);
-		if(RocketChat.authz.hasPermission(user._id), 'view-only-group') {
+		if (RocketChat.authz.hasPermission(user._id, 'view-only-group')) {
 			return {
 				results: RocketChat.models.Users.findByActiveUsersGroupExcept(text, [user.username], {
 					...options,
@@ -98,7 +98,6 @@ Meteor.methods({
 		if (!RocketChat.authz.hasPermission(user._id, 'view-outside-room') || !RocketChat.authz.hasPermission(user._id, 'view-d-room')) {
 			return;
 		}
-		
 		return {
 			results: RocketChat.models.Users.findByActiveUsersExcept(text, [user.username], {
 				...options,
