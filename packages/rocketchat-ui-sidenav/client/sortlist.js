@@ -7,6 +7,9 @@ const checked = function(prop, field) {
 	if (prop === 'sidebarShowFavorites') {
 		return RocketChat.getUserPreference(userId, 'sidebarShowFavorites');
 	}
+	if (prop === 'sidebarGroupByRole') {
+		return RocketChat.getUserPreference(userId, 'sidebarGroupByRole');
+	}
 	if (prop === 'sidebarGroupByType') {
 		return RocketChat.getUserPreference(userId, 'sidebarGroupByType');
 	}

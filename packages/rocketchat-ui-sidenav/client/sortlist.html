@@ -19,18 +19,18 @@
 					<span class="rc-popover__item-text">{{ _"Activity"}}</span>
 				</label>
 			</li>
-			<li class="rc-popover__item {{bold 'sidebarSortby' 'Group'}}">
-				<label class="rc-popover__label">
-					<input type="radio" name="sidebarSortby" value="Group" class="hidden" checked="{{checked 'sidebarSortby' 'Group'}}">
-					<span class="rc-popover__icon">
-						{{> icon block="rc-popover__icon-element" icon='cube' }}
-					</span>
-					<span class="rc-popover__item-text">Grupo</span>
-				</label>
-			</li>
 		</ul>
 		<span class="rc-popover__divider"></span>
 		<ul class="rc-popover__list">
+			<li class="rc-popover__item {{bold 'sidebarGroupByRole'}}">
+				<label class="rc-popover__label">
+					<input type="checkbox" name="sidebarGroupByRole" class="hidden" checked="{{checked 'sidebarGroupByRole'}}"/>
+					<span class="rc-popover__icon">
+						{{> icon block="rc-popover__icon-element" icon='cube' }}
+					</span>
+					<span class="rc-popover__item-text">{{_ "Group_by_Role"}}</span>
+				</label>
+			</li>
 			<li class="rc-popover__item {{bold 'sidebarGroupByType'}}">
 				<label class="rc-popover__label">
 					<input type="checkbox" name="sidebarGroupByType" class="hidden" checked="{{checked 'sidebarGroupByType'}}"/>

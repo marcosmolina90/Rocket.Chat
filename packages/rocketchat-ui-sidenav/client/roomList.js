@@ -3,43 +3,13 @@ import { RocketChat, UiTextContext } from 'meteor/rocketchat:lib';
 import { Template } from 'meteor/templating';
 
 
-async = function(name, callback){
-	Meteor.call('loadroomlist', name, (err, results) => {
-		console.log('ddddddddddddddd', results);
-		var chats = results.rooms;
-		var roles = results.roles;
-		var rooms = [];
-		for (let i = 0; i < chats.length; i++) {
-			if(!chats[i].roles){
-				rooms.push(chats[i]);
-			}
-		}
-
-
-		for (let r = 0; r < roles.length; r++) {
-			for (let i = 0; i < chats.length; i++) {
-				if (chats[i].roles && chats[i].roles.includes(roles[r])) {
-					chats[i].role = roles[r];
-					rooms.push(chats[i]);
-				}
-			}
-		}
-
-		for (let i = 0; i < rooms.length; i++) {
-			let showGroup = false;
-			if (i === 0 || rooms[i].role !== rooms[i - 1].role) {
-				showGroup = true;
-			}
-			rooms[i].showGroup = showGroup;
-		}
-		chatsResults = rooms;
-		loading = false;
-		//for(var d in chatsResults)
-		//		RocketChat.models.ChatSubscription =  chatsResults;
-		callback(chatsResults);
+Template.roomList.onCreated(function helloOnCreated() {
+	this.list = new ReactiveVar([]);
+	var chats = ChatSubscription.find({ "open": true }, {}).fetch();
+	Meteor.call('loadroomlist', chats, (err, results) => {
+		this.list.set(results);
 	});
-}
-
+});
 Template.roomList.helpers({
 	rooms() {
 		console.log('marcos Template.roomList.helpers');
@@ -59,6 +29,7 @@ Template.roomList.helpers({
 				'settings.preferences.sidebarSortby': 1,
 				'settings.preferences.sidebarShowFavorites': 1,
 				'settings.preferences.sidebarShowUnread': 1,
+				'settings.preferences.sidebarGroupByRole': 1,
 				'services.tokenpass': 1,
 			},
 		});
@@ -70,21 +41,8 @@ Template.roomList.helpers({
 
 		const sort = {};
 
-		if (sortBy === 'Group') {
-			var rs = [];
-			var load =true;
-			async(user.name, function(data){
-				rs =  data;
-				load = false;
-			});
-			delay(3000);
-			/*while(load){
-				setTimeout(function(){
-					console.log('www')
-				}, 3000);
-			}*/
-			return rs;
-			
+		if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
+			return Template.instance().list.get();
 		} else {
 
 			if (sortBy === 'activity') {
@@ -132,17 +90,7 @@ Template.roomList.helpers({
 					query.f = { $ne: favoritesEnabled };
 				}
 			}
-
-
-
-			if (sortBy === 'Group') {
-				//var chat = ChatSubscription.findByUserIdGroup(user._id, {});
-				var chat = ChatSubscription.find({}, {}).fetch();
-				return chat;
-			} else {
-				var chat = ChatSubscription.find(query, { sort });
-				return chat;
-			}
+			return ChatSubscription.find(query, { sort });
 		}
 	},
 
@@ -174,11 +122,6 @@ Template.roomList.helpers({
 	showRoomCounter() {
 		return RocketChat.getUserPreference(Meteor.userId(), 'roomCounterSidebar');
 	},
-
-	role() {
-		console.log('role', room);
-		//RocketChat.user.findOne()
-	}
 });
 
 const getLowerCaseNames = (room, nameDefault = '', fnameDefault = '') => {
@@ -191,14 +134,37 @@ const getLowerCaseNames = (room, nameDefault = '', fnameDefault = '') => {
 };
 
 const mergeSubRoom = (subscription) => {
-	const room = RocketChat.models.Rooms.findOne(subscription.rid) || { _updatedAt: subscription.ts };
-	subscription.lastMessage = room.lastMessage;
-	subscription.lm = room._updatedAt;
-	subscription.streamingOptions = room.streamingOptions;
-	return Object.assign(subscription, getLowerCaseNames(subscription));
+	console.log('mergeSubRoom');
+	const user = RocketChat.models.Users.findOne(Meteor.userId(), {
+		fields: {
+			'settings.preferences.sidebarSortby': 1,
+			'settings.preferences.sidebarShowFavorites': 1,
+			'settings.preferences.sidebarShowUnread': 1,
+			'settings.preferences.sidebarGroupByRole': 1,
+			'services.tokenpass': 1,
+		},
+	});
+	if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
+		var chats = Template.instance().list.get();
+		for (const i = 0; i < chats.length; i++) {
+			if (chats[i].rid == subscription.rid) {
+				chats[i].lastMessage = room.lastMessage;
+				chats[i].lm = room._updatedAt;
+				chats[i].streamingOptions = room.streamingOptions;
+			}
+		}
+		return chats;
+	} else {
+		const room = RocketChat.models.Rooms.findOne(subscription.rid) || { _updatedAt: subscription.ts };
+		subscription.lastMessage = room.lastMessage;
+		subscription.lm = room._updatedAt;
+		subscription.streamingOptions = room.streamingOptions;
+		return Object.assign(subscription, getLowerCaseNames(subscription));
+	}
 };
 
 const mergeRoomSub = (room) => {
+	console.log('mergeRoomSub');
 	const sub = RocketChat.models.Subscriptions.findOne({ rid: room._id });
 	if (!sub) {
 		return room;
