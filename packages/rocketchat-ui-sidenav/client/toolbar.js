@@ -37,16 +37,16 @@ const getFromServer = (cb, type) => {
 			const roles = [];
 			for (let i = 0; i < usersLength; i++) {
 				const user = results.users[i];
-				for(let r=0; r < user.roles.length; r++) {
-					if(!roles.includes(user.roles[r]) && !notGroup.includes(user.roles[r])) {
-					    roles.push(user.roles[r]);
+				for(let r = 0; r < user.roles.length; r++) {
+					if (!roles.includes(user.roles[r]) && !notGroup.includes(user.roles[r])) {
+						roles.push(user.roles[r]);
 					}
 				}
 			}
 			roles.sort();
-			for(let r =0; r < roles.length; r++){
+			for(let r =0; r < roles.length; r++) {
 				for (let i = 0; i < usersLength; i++) {
-					if(results.users[i].roles.includes(roles[r])) {
+					if (results.users[i].roles.includes(roles[r])) {
 						resultsFromServer.push({
 							_id: results.users[i]._id,
 							t: 'd',
@@ -61,13 +61,13 @@ const getFromServer = (cb, type) => {
 
 			for (let i = 0; i < resultsFromServer.length; i++) {
 				let showGroup = false;
-				if(i === 0 || resultsFromServer[i].role !== resultsFromServer[i-1].role ){
+				if (i === 0 || resultsFromServer[i].role !== resultsFromServer[i-1].role){
 					showGroup = true;
 				}
-				resultsFromServer[i].showGroup =showGroup;
+				resultsFromServer[i].showGroup = showGroup;
 			}
 		}
-        if (roomsLength) {
+		if (roomsLength) {
 			for (let i = 0; i < roomsLength; i++) {
 				const alreadyOnClient  = true;
 				if(resultsFromClient){

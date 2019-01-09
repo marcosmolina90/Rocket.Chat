@@ -145,8 +145,8 @@ const mergeSubRoom = (subscription) => {
 		},
 	});
 	if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
-		let chats = Template.instance().list.get();
-		for (const i = 0; i < chats.length; i++) {
+		const chats = Template.instance().list.get();
+		for (let i = 0; i < chats.length; i++) {
 			if (chats[i].rid === subscription.rid) {
 				const room = RocketChat.models.Rooms.findOne(subscription.rid) || { _updatedAt: subscription.ts };
 				chats[i].lastMessage = room.lastMessage;
