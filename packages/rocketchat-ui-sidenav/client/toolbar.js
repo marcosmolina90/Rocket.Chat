@@ -69,8 +69,8 @@ const getFromServer = (cb, type) => {
 		}
 		if (roomsLength) {
 			for (let i = 0; i < roomsLength; i++) {
-				let alreadyOnClient  = true;
-				if (resultsFromClient){
+				let alreadyOnClient = true;
+				if (resultsFromClient) {
 					alreadyOnClient = resultsFromClient.find((item) => item._id === results.rooms[i]._id);
 				}
 				if (alreadyOnClient) {
@@ -90,10 +90,10 @@ const getFromServer = (cb, type) => {
 		}
 
 		if (resultsFromServer.length) {
-			if (resultsFromClient){
+			if (resultsFromClient) {
 				cb(resultsFromClient.concat(resultsFromServer));
-			} else{
-				cb(resultsFromServer)
+			} else {
+				cb(resultsFromServer);
 			}
 		}
 	});
