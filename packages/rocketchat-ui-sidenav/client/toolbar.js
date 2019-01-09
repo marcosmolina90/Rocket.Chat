@@ -34,27 +34,27 @@ const getFromServer = (cb, type) => {
 		const roomsLength = results.rooms.length;
 		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];
 		if (usersLength) {
-			let roles = [];
+			const roles = [];
 			for (let i = 0; i < usersLength; i++) {
-				let user = results.users[i];
-				for(let r=0; r< user.roles.length; r++){
-					if(!roles.includes(user.roles[r]) && !notGroup.includes(user.roles[r])){
+				const user = results.users[i];
+				for(let r=0; r < user.roles.length; r++) {
+					if(!roles.includes(user.roles[r]) && !notGroup.includes(user.roles[r])) {
 					    roles.push(user.roles[r]);
 					}
 				}
 			}
 			roles.sort();
-			for(let r =0; r<roles.length; r++){
+			for(let r =0; r < roles.length; r++){
 				for (let i = 0; i < usersLength; i++) {
-					if(results.users[i].roles.includes(roles[r])){
-					resultsFromServer.push({
-						_id: results.users[i]._id,
-						t: 'd',
-						name: results.users[i].username,
-						fname: results.users[i].name,
-						roles: results.users[i].roles,
-						role: roles[r],
-					});
+					if(results.users[i].roles.includes(roles[r])) {
+						resultsFromServer.push({
+							_id: results.users[i]._id,
+							t: 'd',
+							name: results.users[i].username,
+							fname: results.users[i].name,
+							roles: results.users[i].roles,
+							role: roles[r],
+						});
 					}
 				}
 			}
