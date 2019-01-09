@@ -40,9 +40,6 @@ RocketChat.API.helperMethods.set('getUserInfo', function _getUserInfo(user) {
 		}
 		return false;
 	};
-	const getUser = () => {
-		console.log('marcos teste');
-	};
 	const getUserPreferences = () => {
 		const defaultUserSettingPrefix = 'Accounts_Default_User_Preferences_';
 		const allDefaultUserSettings = RocketChat.settings.get(new RegExp(`^${ defaultUserSettingPrefix }.*$`));
