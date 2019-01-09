@@ -14,7 +14,6 @@ let resultsFromClient;
 const isLoading = new ReactiveVar(false);
 
 const getFromServer = (cb, type) => {
-	console.log('marcos chamou getFromServer')
 	isLoading.set(true);
 	const currentFilter = filterText;
 
@@ -33,7 +32,7 @@ const getFromServer = (cb, type) => {
 		const resultsFromServer = [];
 		const usersLength = results.users.length;
 		const roomsLength = results.rooms.length;
-		const notGroup = ["user", "bot", "guest", "admin", "livechat-agent", "livechat-guest"];
+		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];
 		if (usersLength) {
 			let roles = [];
 			for (let i = 0; i < usersLength; i++) {
@@ -84,7 +83,7 @@ const getFromServer = (cb, type) => {
 					name: results.rooms[i].name,
 					lastMessage: results.rooms[i].lastMessage,
 					roles : [],
-					role: "",
+					role: '',
 					showGroup: false,
 				});
 			}
@@ -170,27 +169,28 @@ Template.toolbar.helpers({
 					{ name: searchQuery },
 					{ fname: searchQuery },
 				];
-				/* TODO MAM */
-				//resultsFromClient = collection.find(query, { limit: 20, sort: { unread: -1, ls: -1 } }).fetch();
+				/* TODO MAM 
+				resultsFromClient = collection.find(query, { limit: 20, sort: { unread: -1, ls: -1 } }).fetch();
 
-				//const resultsFromClientLength = resultsFromClient.length;
-				//const user = Meteor.users.findOne(Meteor.userId(), { fields: { name: 1, username:1 } });
-				//if (user) {
-					//usernamesFromClient = [user];
-				//}
+				const resultsFromClientLength = resultsFromClient.length;
+				const user = Meteor.users.findOne(Meteor.userId(), { fields: { name: 1, username:1 } });
+				if (user) {
+					usernamesFromClient = [user];
+				}
 
-				//for (let i = 0; i < resultsFromClientLength; i++) {
-				//	if (resultsFromClient[i].t === 'd') {
-						//usernamesFromClient.push(resultsFromClient[i].name);
-				//	}
-				//}
+				for (let i = 0; i < resultsFromClientLength; i++) {
+					if (resultsFromClient[i].t === 'd') {
+						usernamesFromClient.push(resultsFromClient[i].name);
+					}
+				}
 
-				//cb(resultsFromClient);
+				cb(resultsFromClient);
 				
-				// Use `filter` here to get results for `#` or `@` filter only
-				//if (resultsFromClient.length < 20) {
+				Use `filter` here to get results for `#` or `@` filter only
+				if (resultsFromClient.length < 20) {
 					getFromServerDebounced(cb, type);
-				//}
+				} */
+				getFromServerDebounced(cb, type);
 			},
 
 			getValue(_id, collection, records) {
