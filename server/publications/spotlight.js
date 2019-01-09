@@ -34,8 +34,8 @@ Meteor.methods({
 							roles.push(usr.roles[r]);
 						}
 					}
-				} 
-			} 
+				}
+			}
 		}
 		roles.sort();
 		const rooms = [];
@@ -105,7 +105,7 @@ Meteor.methods({
 				username: 1,
 				name: 1,
 				status: 1,
-				roles: 1
+				roles: 1,
 			},
 			sort: {},
 		};
@@ -117,10 +117,8 @@ Meteor.methods({
 
 		if (RocketChat.authz.hasPermission(userId, 'view-only-group')
 			&& !RocketChat.authz.hasPermission(userId, 'view-outside-room')) {
-			var user = RocketChat.models.Users.find({ _id: userId }).fetch();
+			let user = RocketChat.models.Users.find({ _id: userId }).fetch();
 			result.users = RocketChat.models.Users.findByActiveUsersGroupExcept(text, user[0].roles, usernames, userOptions).fetch();
-			console.log('marcos role numero de usuarios ' + result.users.length, user[0].roles);
-
 			return result;
 		}
 
