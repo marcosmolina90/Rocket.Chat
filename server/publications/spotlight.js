@@ -117,7 +117,7 @@ Meteor.methods({
 
 		if (RocketChat.authz.hasPermission(userId, 'view-only-group')
 			&& !RocketChat.authz.hasPermission(userId, 'view-outside-room')) {
-			let user = RocketChat.models.Users.find({ _id: userId }).fetch();
+			const user = RocketChat.models.Users.find({ _id: userId }).fetch();
 			result.users = RocketChat.models.Users.findByActiveUsersGroupExcept(text, user[0].roles, usernames, userOptions).fetch();
 			return result;
 		}
