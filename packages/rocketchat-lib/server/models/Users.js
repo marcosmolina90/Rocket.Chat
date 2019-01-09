@@ -154,8 +154,8 @@ class ModelUsers extends RocketChat.models._Base {
 					username: { $exists: true, $nin: exceptions },
 				},
 				{
-					roles: { $regex: roles[0], $options: 'i' }
-				}
+					roles: { $regex: roles[0], $options: 'i' },
+				},
 			],
 		};
 
@@ -210,7 +210,6 @@ class ModelUsers extends RocketChat.models._Base {
 
 		return this.find(query, options);
 	}
-	
 
 	findByUsernameNameOrEmailAddress(usernameNameOrEmailAddress, options) {
 		const query = {
