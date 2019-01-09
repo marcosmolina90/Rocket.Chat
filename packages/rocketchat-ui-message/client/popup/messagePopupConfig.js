@@ -215,7 +215,6 @@ Template.messagePopupConfig.helpers({
 				// If needed, add to list the online users
 				if (items.length < 5 && filterText !== '') {
 					const usernamesAlreadyFetched = items.map(({ username }) => username);
-					console.log("ewqeewqewq");
 					if (!RocketChat.authz.hasAllPermission('view-outside-room')) {
 						const usernamesFromDMs = RocketChat.models.Subscriptions
 							.find(

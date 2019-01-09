@@ -55,7 +55,7 @@ class ModelSubscriptions extends RocketChat.models._Base {
 	}
 
 	// FIND
-	findByUserIdGroup(userId, options){
+	findByUserIdGroup(userId, options) {
 		return this.findByUserId(userId, options).fetch();
 	}
 

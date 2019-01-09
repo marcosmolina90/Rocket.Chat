@@ -5,7 +5,7 @@ import { Template } from 'meteor/templating';
 
 Template.roomList.onCreated(function helloOnCreated() {
 	this.list = new ReactiveVar([]);
-	var chats = ChatSubscription.find({ "open": true }, {}).fetch();
+	let chats = ChatSubscription.find({ open: true }, {}).fetch();
 	Meteor.call('loadroomlist', chats, (err, results) => {
 		this.list.set(results);
 	});
