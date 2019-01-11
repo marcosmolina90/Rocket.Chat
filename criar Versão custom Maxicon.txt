@@ -1,0 +1,10 @@
+./example_build.sh
+cd /home/maxicon
+mkdir rocket.build 
+mv /tmp/rocket.chat/bundle /home/maxicon/rocket.build
+cp /home/maxicon/Rocket.Chat/.docker/Dockerfile /home/maxicon/rocket.build
+cd /home/maxicon/rocket.build
+export DOCKER_HOST=192.168.180.144:2375
+sudo docker build -f Dockerfile -t rocket.chat.maxicon:0.0.10 .
+-------------------------------------------------------------------------------------------
+docker run --name rocketchat-custombuild --net customnet  -p 80:3000  -d rocket.chat.maxicon:0.0.10	

@@ -111,7 +111,7 @@ Template.roomList.helpers({
 
 	roomType(room) {
 		if (room.header || room.identifier) {
-			return `type-${ room.header || room.identifier }`;
+			return `type-${room.header || room.identifier}`;
 		}
 	},
 
@@ -135,34 +135,13 @@ const getLowerCaseNames = (room, nameDefault = '', fnameDefault = '') => {
 };
 
 const mergeSubRoom = (subscription) => {
-	console.log('mergeSubRoom');
-	const user = RocketChat.models.Users.findOne(Meteor.userId(), {
-		fields: {
-			'settings.preferences.sidebarSortby': 1,
-			'settings.preferences.sidebarShowFavorites': 1,
-			'settings.preferences.sidebarShowUnread': 1,
-			'settings.preferences.sidebarGroupByRole': 1,
-			'services.tokenpass': 1,
-		},
-	});
-	if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
-		const chats = Template.instance().list.get();
-		for (let i = 0; i < chats.length; i++) {
-			if (chats[i].rid === subscription.rid) {
-				const room = RocketChat.models.Rooms.findOne(subscription.rid) || { _updatedAt: subscription.ts };
-				chats[i].lastMessage = room.lastMessage;
-				chats[i].lm = room._updatedAt;
-				chats[i].streamingOptions = room.streamingOptions;
-			}
-		}
-		return chats;
-	} else {
-		const room = RocketChat.models.Rooms.findOne(subscription.rid) || { _updatedAt: subscription.ts };
-		subscription.lastMessage = room.lastMessage;
-		subscription.lm = room._updatedAt;
-		subscription.streamingOptions = room.streamingOptions;
-		return Object.assign(subscription, getLowerCaseNames(subscription));
-	}
+
+	const room = RocketChat.models.Rooms.findOne(subscription.rid) || { _updatedAt: subscription.ts };
+	subscription.lastMessage = room.lastMessage;
+	subscription.lm = room._updatedAt;
+	subscription.streamingOptions = room.streamingOptions;
+	return Object.assign(subscription, getLowerCaseNames(subscription));
+
 };
 
 const mergeRoomSub = (room) => {
@@ -183,6 +162,16 @@ const mergeRoomSub = (room) => {
 			...getLowerCaseNames(room, sub.name, sub.fname),
 		},
 	});
+	/*var chats = Template.instance().list ? Template.instance().list.get() : [];
+	for(const i = 0; i < chats.length; i++) {
+		if(chats[i].rid === room._id) {
+			chats[i].lastMessage = room.lastMessage;
+			chats[i].lm = room._updatedAt;
+			chats[i].streamingOptions = room.streamingOptions;
+			return chats[i];;
+		}
+	} */
+
 
 	return room;
 };
