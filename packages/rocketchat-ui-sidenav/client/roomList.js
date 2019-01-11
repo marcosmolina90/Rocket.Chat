@@ -162,7 +162,8 @@ const mergeRoomSub = (room) => {
 			...getLowerCaseNames(room, sub.name, sub.fname),
 		},
 	});
-	/*var chats = Template.instance().list ? Template.instance().list.get() : [];
+	/*
+	var chats = Template.instance().list ? Template.instance().list.get() : [];
 	for(const i = 0; i < chats.length; i++) {
 		if(chats[i].rid === room._id) {
 			chats[i].lastMessage = room.lastMessage;
