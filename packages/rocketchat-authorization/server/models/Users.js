@@ -14,7 +14,6 @@ Object.assign(RocketChat.models.Users, {
 
 		return !_.isUndefined(this.findOne(query, { fields: { roles: 1 } }));
 	},
-
 	findUsersInRoles(roles, scope, options) {
 		roles = [].concat(roles);
 
