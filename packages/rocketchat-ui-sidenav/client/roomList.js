@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { RocketChat, UiTextContext } from 'meteor/rocketchat:lib';
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 
 const getRooms = function(chats, callback) {
 	Meteor.call('loadroomlist', chats, (err, results) => {
