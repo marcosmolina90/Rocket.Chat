@@ -143,7 +143,7 @@ Template.sidebarItem.events({
 			type: 'sidebar-item',
 			id: 'hide',
 		}];
-
+		console.log('marcos alert');
 		if (this.alert) {
 			items.push({
 				icon: 'flag',

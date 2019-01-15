@@ -14,8 +14,10 @@ function fetchRooms(userId, rooms) {
 }
 
 Meteor.methods({
-	getroomsuser(name) {
-		return RocketChat.models.Users.findByUsername(name, { fields: { roles : 1 } }).fetch();
+	'getUserRoom'(name) {
+		
+			var data =  RocketChat.models.Users.findByUsername(name, { fields: { roles : 1 } }).fetch();
+		return data;
 	},
 	loadroomlist(chats) {
 		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];
@@ -40,7 +42,7 @@ Meteor.methods({
 		roles.sort();
 		const rooms = [];
 		for (let i = 0; i < chats.length; i++) {
-			if (!chats[i].roles || (chats[i].roles && chats[i].roles.length === 0)) {
+			if (chats[i].rid && (!chats[i].roles || (chats[i].roles && chats[i].roles.length === 0))) {
 				rooms.push(chats[i]);
 			}
 		}
@@ -48,7 +50,7 @@ Meteor.methods({
 
 		for (let r = 0; r < roles.length; r++) {
 			for (let i = 0; i < chats.length; i++) {
-				if (chats[i].roles && chats[i].roles.includes(roles[r])) {
+				if (chats[i].roles && chats[i].roles.includes(roles[r])  && !rooms.includes(chats[i])) {
 					chats[i].role = roles[r];
 					rooms.push(chats[i]);
 				}

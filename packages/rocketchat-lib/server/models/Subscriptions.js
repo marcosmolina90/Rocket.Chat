@@ -25,6 +25,54 @@ class ModelSubscriptions extends RocketChat.models._Base {
 		this.tryEnsureIndex({ 'userHighlights.0': 1 }, { sparse: 1 });
 	}
 
+	findGroup(){
+		let chats = find({open: true})
+		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];
+		const roles = [];
+		for (let i = 0; i < chats.length; i++) {
+			if (chats[i].name) {
+				let usr = {};
+				const usrs = RocketChat.models.Users.findByUsername(chats[i].name, { fields: { roles : 1 } }).fetch();
+				if (usrs && usrs[0]) {
+					usr = usrs[0];
+				}
+				if (usr && usr.roles) {
+					chats[i].roles = usr.roles;
+					for (let r = 0; r < usr.roles.length; r++) {
+						if (!roles.includes(usr.roles[r]) && !notGroup.includes(usr.roles[r])) {
+							roles.push(usr.roles[r]);
+						}
+					}
+				}
+			}
+		}
+		roles.sort();
+		const rooms = [];
+		for (let i = 0; i < chats.length; i++) {
+			if (chats[i].rid && (!chats[i].roles || (chats[i].roles && chats[i].roles.length === 0))) {
+				rooms.push(chats[i]);
+			}
+		}
+
+
+		for (let r = 0; r < roles.length; r++) {
+			for (let i = 0; i < chats.length; i++) {
+				if (chats[i].roles && chats[i].roles.includes(roles[r])  && !rooms.includes(chats[i])) {
+					chats[i].role = roles[r];
+					rooms.push(chats[i]);
+				}
+			}
+		}
+
+		for (let i = 0; i < rooms.length; i++) {
+			let showGroup = false;
+			if (i === 0 || rooms[i].role !== rooms[i - 1].role) {
+				showGroup = true;
+			}
+			rooms[i].showGroup = showGroup;
+		}
+		return rooms;
+	}
 
 	// FIND ONE
 	findOneByRoomIdAndUserId(roomId, userId, options) {
