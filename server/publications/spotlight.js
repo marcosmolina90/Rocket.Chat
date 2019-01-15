@@ -15,9 +15,7 @@ function fetchRooms(userId, rooms) {
 
 Meteor.methods({
 	'getUserRoom'(name) {
-		
-			var data =  RocketChat.models.Users.findByUsername(name, { fields: { roles : 1 } }).fetch();
-		return data;
+		return RocketChat.models.Users.findByUsername(name, { fields: { roles : 1 } }).fetch();
 	},
 	loadroomlist(chats) {
 		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];

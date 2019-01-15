@@ -7,45 +7,6 @@ if (_.isUndefined(RocketChat.models.Subscriptions)) {
 }
 
 Object.assign(RocketChat.models.Subscriptions, {
-	findOnGroup() {
-		console.log('findOnGroup');
-		let chats =  this.find({open : true}).fetch();
-		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];
-	
-		for (let i = 0; i < chats.length; i++) {
-			if (chats[i].name) {
-				var usrs = null;
-				
-				 Meteor.call('validateReceipt', chats[i].name, (error, result) => {
-					if (error) reject(error);
-					usrs = result;
-				  });
-				console.log(usrs);
-				
-				//usrs = RocketChat.models.Users.find(chats[i].name, { fields: { roles : 1 } }).fetch();
-				if (usrs && usrs[0]) {
-					usr = usrs[0];
-				}
-				if (usr && usr.roles) {
-					chats[i].roles = usr.roles;
-					for (let r = 0; r < usr.roles.length; r++) {
-						if (!roles.includes(usr.roles[r]) && !notGroup.includes(usr.roles[r])) {
-							roles.push(usr.roles[r]);
-						}
-					}
-				}
-			
-			}
-		}
-		roles.sort();
-		const rooms = [];
-		for (let i = 0; i < chats.length; i++) {
-			if (chats[i].rid && (!chats[i].roles || (chats[i].roles && chats[i].roles.length === 0))) {
-				rooms.push(chats[i]);
-			}
-		}
-		return rooms;
-	},
 	isUserInRole(userId, roleName, roomId) {
 		if (roomId == null) {
 			return false;
