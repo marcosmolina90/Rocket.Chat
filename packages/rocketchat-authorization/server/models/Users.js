@@ -1,14 +1,27 @@
 import { RocketChat } from 'meteor/rocketchat:lib';
+import _ from 'underscore';
 
-RocketChat.models.Users.roleBaseQuery = function(userId) {
-	return { _id: userId };
-};
+if (_.isUndefined(RocketChat.models.Users)) {
+	RocketChat.models.Users = {};
+}
 
-RocketChat.models.Users.findUsersInRoles = function(roles, scope, options) {
-	roles = [].concat(roles);
-	const query = {
-		roles: { $in: roles },
-	};
+Object.assign(RocketChat.models.Users, {
+	isUserInRole(userId, roleName) {
+		const query = {
+			_id: userId,
+			roles: roleName,
+		};
 
-	return this.find(query, options);
-};
+		return !_.isUndefined(this.findOne(query, { fields: { roles: 1 } }));
+	},
+
+	findUsersInRoles(roles, scope, options) {
+		roles = [].concat(roles);
+
+		const query = {
+			roles: { $in: roles },
+		};
+
+		return this.find(query, options);
+	},
+});
