@@ -6,9 +6,6 @@ if (_.isUndefined(RocketChat.models.Users)) {
 }
 
 Object.assign(RocketChat.models.Users, {
-	findUserName(username){
-		return this.find({username: username});
-	},
 	isUserInRole(userId, roleName) {
 		const query = {
 			_id: userId,
