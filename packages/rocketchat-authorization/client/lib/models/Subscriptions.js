@@ -1,6 +1,5 @@
 import { RocketChat } from 'meteor/rocketchat:lib';
 import _ from 'underscore';
-import { Promise } from 'meteor/promise';
 
 if (_.isUndefined(RocketChat.models.Subscriptions)) {
 	RocketChat.models.Subscriptions = {};

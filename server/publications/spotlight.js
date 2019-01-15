@@ -48,7 +48,7 @@ Meteor.methods({
 
 		for (let r = 0; r < roles.length; r++) {
 			for (let i = 0; i < chats.length; i++) {
-				if (chats[i].roles && chats[i].roles.includes(roles[r])  && !rooms.includes(chats[i])) {
+				if (chats[i].roles && chats[i].roles.includes(roles[r]) && !rooms.includes(chats[i])) {
 					chats[i].role = roles[r];
 					rooms.push(chats[i]);
 				}
