@@ -1,10 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { RocketChat, UiTextContext } from 'meteor/rocketchat:lib';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-import { Promise } from 'meteor/promise';
 
-const getRooms = function(chats, callback){
+const getRooms = function(chats, callback) {
 	Meteor.call('loadroomlist', chats, (err, results) => {
 		callback(results);
 	});
