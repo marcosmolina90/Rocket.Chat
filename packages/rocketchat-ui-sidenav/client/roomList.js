@@ -6,7 +6,7 @@ const getRooms = function(chats, callback) {
 	Meteor.call('loadroomlist', chats, (err, results) => {
 		callback(results);
 	});
-}
+};
 
 
 Template.roomList.onCreated(function OnCreated() {
@@ -21,16 +21,16 @@ Template.roomList.onCreated(function OnCreated() {
 	});
 	Session.set('user', user);
 	if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
-		let chats =  ChatSubscription.find({open: true	}).fetch();
+		const chats = ChatSubscription.find({ open: true }).fetch();
 		Meteor.call('loadroomlist', chats, (err, results) => {
-			Session.set( "rooms". results);
+			Session.set('rooms', results);
 		});
 	}
 });
 
 Template.roomList.helpers({
-	list(){
-		return Session.get('rooms')
+	list() {
+		return Session.get('rooms');
 	},
 	rooms() {
 		console.log('marcos Template.roomList.helpers');
@@ -54,10 +54,10 @@ Template.roomList.helpers({
 		const sort = {};
 
 		if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
-			chats =  ChatSubscription.find({open: true	}).fetch();
-			getRooms(chats, function(data){
+			const chats = ChatSubscription.find({ open: true }).fetch();
+			getRooms(chats, function(data) {
 				Session.set('rooms', data);
-			})
+			});
 			return chats;
 		} else {
 			if (sortBy === 'activity') {
@@ -69,7 +69,7 @@ Template.roomList.helpers({
 			if (this.identifier === 'unread') {
 				query.alert = true;
 				query.hideUnreadStatus = { $ne: true };
-				var chats = ChatSubscription.find(query, { sort }).fetch();
+				const chats = ChatSubscription.find(query, { sort }).fetch();
 				Session.set('rooms', chats);
 				return chats;
 			}
@@ -106,7 +106,7 @@ Template.roomList.helpers({
 					query.f = { $ne: favoritesEnabled };
 				}
 			}
-			var chats =  ChatSubscription.find(query, { sort }).fetch();
+			const chats = ChatSubscription.find(query, { sort }).fetch();
 			Session.set('rooms', chats);
 			return chats;
 		}
@@ -157,7 +157,6 @@ const mergeSubRoom = (subscription) => {
 	subscription.lastMessage = room.lastMessage;
 	subscription.lm = room._updatedAt;
 	subscription.streamingOptions = room.streamingOptions;
-//	subscription.unread = 66;
 	return Object.assign(subscription, getLowerCaseNames(subscription));
 
 };
@@ -180,18 +179,6 @@ const mergeRoomSub = (room) => {
 			...getLowerCaseNames(room, sub.name, sub.fname),
 		},
 	});
-	/*
-	var chats = Template.instance().list ? Template.instance().list.get() : [];
-	for(const i = 0; i < chats.length; i++) {
-		if(chats[i].rid === room._id) {
-			chats[i].lastMessage = room.lastMessage;
-			chats[i].lm = room._updatedAt;
-			chats[i].streamingOptions = room.streamingOptions;
-			return chats[i];;
-		}
-	} */
-
-
 	return room;
 };
 
