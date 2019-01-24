@@ -17,7 +17,7 @@ services:
     depends_on:
       - mongo
     ports:
-      - 3000:3000
+      - 3008:3000
     labels:
       - "traefik.backend=rocketchat"
       - "traefik.frontend.rule=Host: your.domain.tld"
@@ -60,7 +60,7 @@ services:
       - ./scripts:/home/hubot/scripts
   # this is used to expose the hubot port for notifications on the host on port 3001, e.g. for hubot-jenkins-notifier
     ports:
-      - 3001:8080
+      - 3009:8080
 
   #traefik:
   #  image: traefik:latest
