@@ -40,7 +40,9 @@ Meteor.methods({
 		roles.sort();
 		const rooms = [];
 		for (let i = 0; i < chats.length; i++) {
-			if (chats[i].rid && (!chats[i].roles || (chats[i].roles && chats[i].roles.length === 0))) {
+			if (chats[i].t === 'c') {
+				rooms.push(chats[i]);
+			} else if (chats[i].rid && (!chats[i].roles || (chats[i].roles && chats[i].roles.length === 0))) {
 				rooms.push(chats[i]);
 			}
 		}

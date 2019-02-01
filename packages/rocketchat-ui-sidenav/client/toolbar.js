@@ -33,6 +33,17 @@ const getFromServer = (cb, type) => {
 		const usersLength = results.users.length;
 		const roomsLength = results.rooms.length;
 		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];
+		for (let i = 0; i < roomsLength; i++) {
+			resultsFromServer.push({
+				_id: results.rooms[i]._id,
+				t:  results.rooms[i].t,
+				name: results.rooms[i].name,
+				fname: results.rooms[i].name,
+				roles: [],
+				role: undefined,
+			});
+
+		}
 		if (usersLength) {
 			const roles = [];
 			for (let i = 0; i < usersLength; i++) {
@@ -61,7 +72,9 @@ const getFromServer = (cb, type) => {
 
 			for (let i = 0; i < resultsFromServer.length; i++) {
 				let showGroup;
-				if (i === 0 || resultsFromServer[i].role !== resultsFromServer[i - 1].role) {
+				if (!resultsFromServer[i].role) {
+					showGroup = false;
+				} else if (i === 0 || resultsFromServer[i].role !== resultsFromServer[i - 1].role) {
 					showGroup = true;
 				}
 				resultsFromServer[i].showGroup = showGroup;

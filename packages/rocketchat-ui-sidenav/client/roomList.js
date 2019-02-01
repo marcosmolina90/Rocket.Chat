@@ -23,6 +23,7 @@ Template.roomList.onCreated(function OnCreated() {
 	Session.set('user', user);
 	if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
 		const chats = ChatSubscription.find({ open: true }).fetch();
+		console.log('chats', chats);
 		Meteor.call('loadroomlist', chats, (err, results) => {
 			Session.set('rooms', results);
 		});
@@ -34,7 +35,6 @@ Template.roomList.helpers({
 		return Session.get('rooms');
 	},
 	rooms() {
-		console.log('marcos Template.roomList.helpers');
 		/*
 			modes:
 				sortby activity/alphabetical
