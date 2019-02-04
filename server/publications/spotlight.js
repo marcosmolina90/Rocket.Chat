@@ -50,9 +50,18 @@ Meteor.methods({
 
 		for (let r = 0; r < roles.length; r++) {
 			for (let i = 0; i < chats.length; i++) {
-				if (chats[i].roles && chats[i].roles.includes(roles[r]) && !rooms.includes(chats[i])) {
-					chats[i].role = roles[r];
-					rooms.push(chats[i]);
+				if (chats[i].roles) {
+					let role;
+					for (let ro = 0; ro < chats[i].roles.length; ro++) {
+						if (!notGroup.includes(chats[i].roles[ro])) {
+							role = chats[i].roles[ro];
+							break;
+						}
+					}
+					if (role === roles[r]) {
+						chats[i].role = roles[r];
+						rooms.push(chats[i]);
+					}
 				}
 			}
 		}

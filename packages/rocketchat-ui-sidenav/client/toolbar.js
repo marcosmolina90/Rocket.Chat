@@ -56,8 +56,16 @@ const getFromServer = (cb, type) => {
 			}
 			roles.sort();
 			for (let r = 0; r < roles.length; r++) {
+				console.log(roles[r]);
 				for (let i = 0; i < usersLength; i++) {
-					if (results.users[i].roles.includes(roles[r])) {
+					let role;
+					for (let ro = 0; ro < results.users[i].roles.length; ro++) {
+						if (!notGroup.includes(results.users[i].roles[ro])) {
+							role = results.users[i].roles[ro];
+							break;
+						}
+					}
+					if (role === roles[r]) {
 						resultsFromServer.push({
 							_id: results.users[i]._id,
 							t: 'd',
