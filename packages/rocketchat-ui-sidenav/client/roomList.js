@@ -51,7 +51,15 @@ Template.roomList.helpers({
 			return Rooms.find({ t: 'c' }, { sort: { name: 1 } });
 		}
 
-		const user = Session.get('user');
+		const user = RocketChat.models.Users.findOne(Meteor.userId(), {
+			fields: {
+				'settings.preferences.sidebarSortby': 1,
+				'settings.preferences.sidebarShowFavorites': 1,
+				'settings.preferences.sidebarShowUnread': 1,
+				'settings.preferences.sidebarGroupByRole': 1,
+				'services.tokenpass': 1,
+			},
+		});
 		const sortBy = RocketChat.getUserPreference(user, 'sidebarSortby') || 'alphabetical';
 		const query = {
 			open: true,
