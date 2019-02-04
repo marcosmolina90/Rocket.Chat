@@ -14,9 +14,11 @@ function fetchRooms(userId, rooms) {
 }
 
 Meteor.methods({
+	/*	TODO Maxicon */
 	'getUserRoom'(name) {
 		return RocketChat.models.Users.findByUsername(name, { fields: { roles : 1 } }).fetch();
 	},
+	/*	TODO Maxicon */
 	loadroomlist(chats) {
 		const notGroup = ['user', 'bot', 'guest', 'admin', 'livechat-agent', 'livechat-guest'];
 		const roles = [];
@@ -75,6 +77,7 @@ Meteor.methods({
 		}
 		return rooms;
 	},
+	/*	TODO Maxicon */
 	spotlight(text, usernames, type = { users: true, rooms: true }, rid) {
 		const searchForChannels = text[0] === '#';
 		const searchForDMs = text[0] === '@';
@@ -125,7 +128,7 @@ Meteor.methods({
 		} else {
 			userOptions.sort.username = 1;
 		}
-
+		//	TODO Maxicon
 		if (RocketChat.authz.hasPermission(userId, 'view-only-group')
 			&& !RocketChat.authz.hasPermission(userId, 'view-outside-room')) {
 			const user = RocketChat.models.Users.find({ _id: userId }).fetch();

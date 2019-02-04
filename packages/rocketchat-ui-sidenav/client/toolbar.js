@@ -16,7 +16,7 @@ const isLoading = new ReactiveVar(false);
 const getFromServer = (cb, type) => {
 	isLoading.set(true);
 	const currentFilter = filterText;
-
+	//	TODO Maxicon
 	Meteor.call('spotlight', currentFilter, usernamesFromClient, type, (err, results) => {
 		if (currentFilter !== filterText) {
 			return;
@@ -191,7 +191,7 @@ Template.toolbar.helpers({
 					{ fname: searchQuery },
 				];
 				/*
-				TODO MAM
+				TODO Maxicon
 				resultsFromClient = collection.find(query, { limit: 20, sort: { unread: -1, ls: -1 } }).fetch();
 
 				const resultsFromClientLength = resultsFromClient.length;

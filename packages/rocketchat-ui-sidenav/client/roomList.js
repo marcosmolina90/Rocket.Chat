@@ -3,13 +3,14 @@ import { RocketChat, UiTextContext } from 'meteor/rocketchat:lib';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 
+/*	TODO Maxicon */
 const getRooms = function(chats, callback) {
 	Meteor.call('loadroomlist', chats, (err, results) => {
 		callback(results);
 	});
 };
 
-
+/*	TODO Maxicon */
 Template.roomList.onCreated(function OnCreated() {
 	const user = RocketChat.models.Users.findOne(Meteor.userId(), {
 		fields: {
@@ -31,6 +32,7 @@ Template.roomList.onCreated(function OnCreated() {
 });
 
 Template.roomList.helpers({
+	/*	TODO Maxicon */
 	list() {
 		return Session.get('rooms');
 	},
@@ -53,7 +55,7 @@ Template.roomList.helpers({
 		};
 
 		const sort = {};
-
+		/*	TODO Maxicon */
 		if (RocketChat.getUserPreference(user, 'sidebarGroupByRole')) {
 			const chats = ChatSubscription.find({ open: true }).fetch();
 			getRooms(chats, function(data) {

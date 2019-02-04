@@ -78,6 +78,7 @@ Meteor.methods({
 		}
 
 		const sort = sortUsers(sortBy, sortDirection);
+		//	TODO Maxicon
 		if (RocketChat.authz.hasPermission(user._id, 'view-only-group')) {
 			return {
 				results: RocketChat.models.Users.findByActiveUsersGroupExcept(text, [user.username], {
