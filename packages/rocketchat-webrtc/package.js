@@ -6,6 +6,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
+<<<<<<< HEAD
 	api.use('rocketchat:lib');
 	api.use('ecmascript');
 
@@ -18,4 +19,17 @@ Package.onUse(function(api) {
 	api.addFiles('server/settings.js', 'server');
 
 	api.export('WebRTC', 'client');
+=======
+	api.use([
+		'ecmascript',
+		'rocketchat:utils',
+		'rocketchat:ui-utils',
+		'rocketchat:notifications',
+		'rocketchat:settings',
+		'rocketchat:models',
+		'templating',
+	]);
+	api.mainModule('client/index.js', 'client');
+	api.mainModule('server/index.js', 'server');
+>>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825
 });

@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 /* globals ChromeScreenShare, fireGlobalEvent */
 this.ChromeScreenShare = {
+=======
+import { fireGlobalEvent } from 'meteor/rocketchat:ui-utils';
+
+export const ChromeScreenShare = {
+>>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825
 	callbacks: {},
 	installed: false,
 	init() {

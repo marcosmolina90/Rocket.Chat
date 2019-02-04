@@ -18,6 +18,7 @@ Package.onUse(function(api) {
 		'rocketchat:lib',
 		'rocketchat:api',
 		'rocketchat:grant',
+		'rocketchat:file-upload',
 	]);
 	api.mainModule('client/index.js', 'client');
 	api.mainModule('server/index.js', 'server');

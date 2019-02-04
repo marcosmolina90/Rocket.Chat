@@ -17,6 +17,7 @@ Package.onUse(function(api) {
 		'rocketchat:lib',
 		'sha',
 		'rocketchat:lazy-load',
+		'rocketchat:file-upload',
 	]);
 	api.mainModule('client/index.js', 'client');
 });
