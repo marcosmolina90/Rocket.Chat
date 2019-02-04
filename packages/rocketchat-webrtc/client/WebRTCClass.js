@@ -4,15 +4,12 @@ import { Tracker } from 'meteor/tracker';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router' ;
 import { TAPi18n } from 'meteor/tap:i18n';
-<<<<<<< HEAD
-=======
 import { t } from 'meteor/rocketchat:utils';
 import { ChromeScreenShare } from './screenShare';
 import { Notifications } from 'meteor/rocketchat:notifications';
 import { settings } from 'meteor/rocketchat:settings';
 import { modal } from 'meteor/rocketchat:ui-utils';
 import { ChatSubscription } from 'meteor/rocketchat:models';
->>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825
 
 class WebRTCTransportClass {
 	constructor(webrtcInstance) {

@@ -3,11 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { SystemLogger } from 'meteor/rocketchat:logger';
-<<<<<<< HEAD
-=======
 import { getWorkspaceAccessToken } from 'meteor/rocketchat:cloud';
 import { Push } from 'meteor/rocketchat:push';
->>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825
 
 
 Meteor.methods({
