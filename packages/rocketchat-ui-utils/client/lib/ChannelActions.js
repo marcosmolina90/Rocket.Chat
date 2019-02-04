@@ -1,11 +1,8 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
-<<<<<<< HEAD:packages/rocketchat-lib/client/lib/ChannelActions.js
-=======
 import { t, UiTextContext, roomTypes, handleError } from 'meteor/rocketchat:utils';
 import { modal } from './modal';
 import { call } from './callMethod';
->>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825:packages/rocketchat-ui-utils/client/lib/ChannelActions.js
 
 export function hide(type, rid, name) {
 	const warnText = roomTypes.roomTypes[type].getUiText(UiTextContext.HIDE_WARNING);

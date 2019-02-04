@@ -1,14 +1,11 @@
 import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
-<<<<<<< HEAD
-=======
 import { t } from 'meteor/rocketchat:utils';
 import { settings } from 'meteor/rocketchat:settings';
 import { roomTypes } from 'meteor/rocketchat:utils';
 import { Rooms } from 'meteor/rocketchat:models';
 import { callbacks } from 'meteor/rocketchat:callbacks';
->>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825
 
 Template.chatRoomItem.helpers({
 	roomData() {
