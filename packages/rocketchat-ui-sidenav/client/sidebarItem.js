@@ -2,10 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
-<<<<<<< HEAD
-=======
 import { t, getUserPreference, roomTypes } from 'meteor/rocketchat:utils';
->>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825
 import moment from 'moment';
 import { popover, renderMessageBody } from 'meteor/rocketchat:ui-utils';
 import { Users, ChatSubscription } from 'meteor/rocketchat:models';

@@ -2,16 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
-<<<<<<< HEAD
-import { popover } from 'meteor/rocketchat:ui';
-=======
 import { popover } from 'meteor/rocketchat:ui-utils';
 import { t, getUserPreference, handleError } from 'meteor/rocketchat:utils';
 import { AccountBox, menu, SideNav } from 'meteor/rocketchat:ui-utils';
 import { callbacks } from 'meteor/rocketchat:callbacks';
 import { settings } from 'meteor/rocketchat:settings';
 import { hasAtLeastOnePermission } from 'meteor/rocketchat:authorization';
->>>>>>> 9d7d2705b884d01ccff402c26cd9e38006181825
 
 const setStatus = (status) => {
 	AccountBox.setStatus(status);
